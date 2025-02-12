@@ -1,38 +1,30 @@
-import { FlatCompat } from '@eslint/eslintrc'
-import js from '@eslint/js'
+// @ts-check
+import eslint from '@eslint/js'
 import prettierConfig from 'eslint-config-prettier'
 import perfectionist from 'eslint-plugin-perfectionist'
 import unusedImports from 'eslint-plugin-unused-imports'
 import globals from 'globals'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import tseslint from 'typescript-eslint'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  allConfig: js.configs.all,
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-})
-
-export default [
-  ...tseslint.configs.recommended,
-  perfectionist.configs['recommended-natural'],
-  ...compat.extends('eslint:recommended', 'prettier'),
+export default tseslint.config(
   {
+    name: 'Ignore dist',
+    ignores: ['dist'],
+  },
+  {
+    name: 'Apply globals',
     languageOptions: {
       globals: {
         ...globals.node,
       },
     },
-
-    plugins: {
-      'unused-imports': unusedImports,
-    },
-
+  },
+  { name: 'ESLint recommended', ...eslint.configs.recommended },
+  tseslint.configs.recommended,
+  {
+    name: 'Unused imports',
+    plugins: { 'unused-imports': unusedImports },
     rules: {
-      '@typescript-eslint/no-explicit-any': 1,
       'unused-imports/no-unused-imports': 1,
 
       'unused-imports/no-unused-vars': [
@@ -45,14 +37,19 @@ export default [
         },
       ],
     },
-
-    settings: {
-      'import/resolver': {
-        typescript: {
-          project: './tsconfig.json',
-        },
-      },
+  },
+  {
+    name: 'Perfectionist',
+    extends: [perfectionist.configs['recommended-natural']],
+  },
+  {
+    name: 'No explicit any',
+    rules: {
+      '@typescript-eslint/no-explicit-any': 1,
     },
   },
-  prettierConfig,
-]
+  {
+    name: 'Prettier',
+    extends: [prettierConfig],
+  },
+)

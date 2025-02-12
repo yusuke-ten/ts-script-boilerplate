@@ -5,7 +5,8 @@
     "dev": "tsx watch src/index.ts",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "lint:inspect": "npx eslint --inspect-config"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
