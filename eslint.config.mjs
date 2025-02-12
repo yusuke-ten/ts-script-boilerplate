@@ -1,5 +1,6 @@
 import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
+import prettierConfig from 'eslint-config-prettier'
 import perfectionist from 'eslint-plugin-perfectionist'
 import unusedImports from 'eslint-plugin-unused-imports'
 import globals from 'globals'
@@ -53,4 +54,5 @@ export default [
       },
     },
   },
+  prettierConfig,
 ]
