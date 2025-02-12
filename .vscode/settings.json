@@ -4,6 +4,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
   },
+  "eslint.format.enable": true,
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ],
   "[typescript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"

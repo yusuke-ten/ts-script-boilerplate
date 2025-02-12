@@ -8,16 +8,16 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    name: 'Ignore dist',
     ignores: ['dist'],
+    name: 'Ignore dist',
   },
   {
-    name: 'Apply globals',
     languageOptions: {
       globals: {
         ...globals.node,
       },
     },
+    name: 'Apply globals',
   },
   { name: 'ESLint recommended', ...eslint.configs.recommended },
   tseslint.configs.recommended,
@@ -39,8 +39,8 @@ export default tseslint.config(
     },
   },
   {
-    name: 'Perfectionist',
     extends: [perfectionist.configs['recommended-natural']],
+    name: 'Perfectionist',
   },
   {
     name: 'No explicit any',
@@ -49,7 +49,7 @@ export default tseslint.config(
     },
   },
   {
-    name: 'Prettier',
     extends: [prettierConfig],
+    name: 'Prettier',
   },
 )
